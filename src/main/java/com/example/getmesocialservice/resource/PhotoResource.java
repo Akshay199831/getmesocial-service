@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -16,7 +17,7 @@ public class PhotoResource {
     private PhotoService photoservice;
 
     @PostMapping
-    public Photo savephoto(@RequestBody Photo photo){
+    public Photo savephoto(@RequestBody @Valid Photo photo){
         return photoservice.savephoto(photo);
 
     }

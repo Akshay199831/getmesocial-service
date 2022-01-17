@@ -1,12 +1,19 @@
 package com.example.getmesocialservice.Model;
 
+import com.example.getmesocialservice.validation.ValidCreator;
+import com.example.getmesocialservice.validation.ValidName;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
+
+import javax.validation.constraints.NotEmpty;
 
 public class Comment {
     @Id
     private String id;
     private String PhotoId;
+    @Length(min = 5)
     private String message;
+    @NotEmpty @ValidCreator
     private String createdBy;
     private String dateCreated;
 

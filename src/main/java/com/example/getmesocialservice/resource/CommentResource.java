@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -16,7 +17,7 @@ public class CommentResource {
     private CommentService commentService;
 
     @PostMapping
-    public Comment savecomment(@RequestBody Comment comment){
+    public Comment savecomment(@RequestBody @Valid Comment comment){
         return commentService.saveComment(comment);
 
     }

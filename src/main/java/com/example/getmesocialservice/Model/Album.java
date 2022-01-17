@@ -1,11 +1,18 @@
 package com.example.getmesocialservice.Model;
 
+import com.example.getmesocialservice.validation.ValidCreator;
+import com.example.getmesocialservice.validation.ValidName;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.Id;
+
+import javax.validation.constraints.NotEmpty;
 
 public class Album {
     @Id
     private String id;
+    @Length(max = 10)
     private String name;
+    @NotEmpty @ValidCreator
     private String description;
     private String coverPicUrl;
 

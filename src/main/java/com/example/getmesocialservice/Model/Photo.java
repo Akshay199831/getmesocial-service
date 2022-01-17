@@ -1,11 +1,15 @@
 package com.example.getmesocialservice.Model;
+import com.example.getmesocialservice.validation.ValidCreator;
 import org.springframework.data.annotation.Id;
+
+import javax.validation.constraints.NotEmpty;
 
 public class Photo {
     @Id
     private String id;
     private String albumId;
     private String photoUrl;
+    @NotEmpty @ValidCreator
     private String createdBy;
     private String dateCreated;
 
