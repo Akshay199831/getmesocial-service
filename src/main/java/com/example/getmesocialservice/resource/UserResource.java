@@ -1,5 +1,8 @@
 package com.example.getmesocialservice.resource;
+import com.example.getmesocialservice.Model.FirebaseUser;
 import com.example.getmesocialservice.exception.RestrictedInfoException;
+import com.example.getmesocialservice.service.FirebaseService;
+import com.google.firebase.auth.FirebaseAuthException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.validation.Valid;
+import java.io.IOException;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -20,9 +24,17 @@ public class UserResource {
     @Autowired
     private UserService userService;
 
+
+    @Autowired
+    private FirebaseService firebaseService;
+
     @PostMapping
-    public User saveUser(@RequestBody @Valid User user){
-        return userService.saveUser(user);
+    public User saveUser(@RequestBody @Valid User user, @RequestHeader(name = "idToken") String idToken) throws IOException, FirebaseAuthException {
+        FirebaseUser firebaseUser = firebaseService.authenticatin(idToken);
+        if(firebaseUser != null){
+            return userService.saveUser(user);
+        }
+        return null;
 
     }
 
